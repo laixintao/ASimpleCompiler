@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E2F96178-4FE9-4398-B1E4-F237F1DB7D24</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PointerPascal</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>89EF2405D163D3B54E7288D8B2A3BBC68D377CFB</key>
+		<string>https://github.com/laixintao/ASimpleCompiler.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PointerPascal/PointerPascal.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>89EF2405D163D3B54E7288D8B2A3BBC68D377CFB</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/laixintao/ASimpleCompiler.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>89EF2405D163D3B54E7288D8B2A3BBC68D377CFB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>89EF2405D163D3B54E7288D8B2A3BBC68D377CFB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ASimpleCompiler</string>
+		</dict>
+	</array>
+</dict>
+</plist>
