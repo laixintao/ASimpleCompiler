@@ -1,3 +1,11 @@
+/* 
+这个小程序用于格式化flex源文件中的关键字。
+input.txt 为输入
+output.txt 为输出
+本程序要适当修改。
+将关键字格式化成flex可以处理的语法。
+*/
+
 #include <iostream>
 #include <cstdio>
 using namespace std;
