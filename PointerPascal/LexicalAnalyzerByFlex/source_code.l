@@ -13,15 +13,14 @@ alnum [_A-Za-z0-9]
 d [0-9]
 
 %x COMMENT
+
 %%
 "/*" {BEGIN COMMENT;}
 <COMMENT>\n {}
 <COMMENT>"*/" {BEGIN 0;}
 <COMMENT>. {}
 
-"\n" return;
-" " return;
-"\t" return;
+
 
 [1-9]{d}* printf("%s:(2,%s)",yytext,yytext);
 
@@ -153,35 +152,10 @@ d [0-9]
 "xor"               	 printf("xor:(3,105)");
 
 ":"               printf("(21,0)");
-
-{d}+{letter}* printf("ERRORCHAR\t%s",yytext);
-{letter}{alnum}* { 
-			int id=findNum(yytext,table); 
-			if(table==id)
-				table++;
-			printf("%s:(2,%d)",yytext,id); 
-};
-
-. printf("ERRORCHAR,%s",yytext);
+"[.]+" printf("ERROR");
 %%
 
-char list[100][100];
-
-int mySize=0;
-
-int findNum(char *a,int mySize){
-	int i;
-	for(i=0;i<mySize;i++){
-		if(!strcmp(a,list[i])){
-			return i;
-		}
-	}
-	strcpy(list[mySize],a);
-	mySize++;
-	return mySize-1;
-}
-
-void main()
+int main()
 
 
 {
@@ -195,6 +169,7 @@ while(yylex()){
 	}
 	count++;
 }
+return 0;
 }
 int yywrap()
 {

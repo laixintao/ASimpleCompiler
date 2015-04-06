@@ -13,3 +13,5 @@ You can learn the compilers' principles,techniques and tools from it.For more In
 ## to do
 
 - [ ] 语言实现的词法分析器不能对照符号表，只能分析单词种类
+
+- [ ] 词法分析器要实现变量名查重功能
