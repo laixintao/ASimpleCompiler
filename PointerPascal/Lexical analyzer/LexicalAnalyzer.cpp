@@ -1,20 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 #include<iostream>
+#include "LexicalAnalyzerh.h"
 using namespace std;
-#define WORD_LENGTH 130 // 单词最大长度
-#define WORD_OF_PROGRAM 1000 //最大单词数
 
-char prog[WORD_OF_PROGRAM*WORD_LENGTH],token[WORD_LENGTH];
-char ch;
-int syn,p,m=0,n,row;
-double sum =0;   //类型为整数或者小数的时候，用于保存源数据
-int syn_of_rwtab; //遍历关键字数组
-int locate_line; //单词在行中的位置
-char *rwtab[18]={"program","const","var","integer",
-        "decimal","string","procedure","begin",
-        "end ","if","then","else","while","do",
-        "call","read","write","not"}; //保存关键字
 
 void getToken(){
     /*
@@ -149,41 +138,4 @@ void getToken(){
         case'\n':syn=-2;locate_line=0;break;
         default: syn=-1;break;
     }
-}
-
-int main()
-{
-    p=0;
-    row=1;
-    cout<<"Please input string:"<<endl;
-    do
-    {
-        cin.get(ch);
-        prog[p++]=ch;
-    }
-    while(ch!='#');
-    int temp = 0; //不区分大小写，全部转换成小写。
-    while(prog[temp]!='#'){
-        if(prog[temp]<='Z' && prog[temp]>='A')
-            prog[temp]+='a'-'A';
-        temp++;
-    }
-    p=0;
-    do
-    {
-        getToken();
-        locate_line++;
-        switch(syn)
-        {
-        case 1: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<rwtab[syn_of_rwtab]<<")"<<endl;break;
-        case 2: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<token<<")"<<endl; break;
-        case 5: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<token<<")"<<endl; break;
-        case 6: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<token[0]<<")"<<endl; break;
-        case 3: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<sum<<")"<<endl; break;
-        case 4: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<sum<<")"<<endl; break;
-        case -1: cout<<"Error in row "<<row<<"!"<<endl; break;
-        case -2: row=row++;break;
-        }
-    }
-    while (syn!=0);
 }

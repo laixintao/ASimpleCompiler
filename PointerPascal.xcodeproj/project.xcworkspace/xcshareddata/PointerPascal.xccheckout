@@ -14,11 +14,11 @@
 		<string>https://github.com/laixintao/ASimpleCompiler.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PointerPascal/PointerPascal.xcodeproj</string>
+	<string>PointerPascal.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>89EF2405D163D3B54E7288D8B2A3BBC68D377CFB</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/laixintao/ASimpleCompiler.git</string>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>89EF2405D163D3B54E7288D8B2A3BBC68D377CFB</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ASimpleCompiler</string>
+			<string>PointerPascal</string>
 		</dict>
 	</array>
 </dict>

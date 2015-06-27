@@ -232,6 +232,7 @@
 				7307D8F61ACCFCC20091F54A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
