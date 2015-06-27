@@ -1,25 +1,38 @@
-//
-//  main.cpp
-//  PointerPascal
-//
-//  Created by Sinpeach on 15/4/2.
-//  Copyright (c) 2015年 laixintao. All rights reserved.
-//
+#include "stdio.h"
+#include "iostream"
 
-#include <iostream>
-//#include "LexicalAnalyzerh.h"
-#define WORD_LENGTH 130 // 单词最大长度
-#define WORD_OF_PROGRAM 1000 //最大单词数
 
-using namespace std;
 
-char prog[WORD_OF_PROGRAM*WORD_LENGTH],token[WORD_LENGTH];
-char ch;
-int syn,p,m=0,n,row;
-double sum =0;   //类型为整数或者小数的时候，用于保存源数据
-int syn_of_rwtab; //遍历关键字数组
-int locate_line; //单词在行中的位置
-char *rwtab[18]={
+#define WORD_LENGTH 128      //单词的最大长度
+#define PROGRAM_LENGTH 1024  //程式的最大单词数
+
+//定义符号表
+// 空格
+#define SPACE 0
+// id和保留字
+#define IDENTIFINDER 10 //10是标识符
+#define BEGIN 11
+#define AS 12
+#define SUB 13
+#define END 14
+#define IF 15
+#define THEN 16
+#define ELSE 17
+# define CALL 18
+#define WHILE 19
+#define DO 20
+#define INTEGER 21
+#define FLOAT 22
+#define INPUT 23
+#define OUTPUT 24
+#define VAR 25
+//运算符
+#define PLUS 30
+#define MINUS 31
+#define CHENG 32
+#define CHU 33
+
+const char *rwtab[][WORD_LENGTH]={
     "program",
     "const",
     "var",
@@ -37,179 +50,44 @@ char *rwtab[18]={
     "call",
     "read",
     "write",
-    "not"}; //保存关键字
+    "not"};
 
-void getToken();
+char prog[WORD_LENGTH * PROGRAM_LENGTH];
 
+int get_token(char &token);
+bool read_file();
 
-void getToken(){
-    /*
+/////////////////////////////////////////////
+// starts here:
+/////////////////////////////////////////////
+using namespace std;
 
-     */
-    for(n=0;n<WORD_LENGTH;n++) token[n]=NULL;
-    ch=prog[p++];
-    //****************第6类 分隔符***********************************//
-    if(ch==' '||ch==';'||
-       ch=='{'||ch=='}'||
-       ch=='('||ch==')'){
-        syn = 6;
-        token[0] = ch;
-    }
-    //***************2 标识符 1 关键字*********************************//
-    else if((ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')||ch=='_')  //可能是标示符或者变量名
-    {
-        m=0;
-        while((ch>='0'&&ch<='9')||(ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')||ch=='_')
-        {
-            token[m++]=ch;
-            ch=prog[p++];
-        }
-        token[m++]='\0';
-        p--;
-        syn=2;
-        for(n=0;n<18;n++)  //将识别出来的字符和已定义的标示符作比较，
-            if(strcmp(token,rwtab[n])==0)
-            {
-                syn=1;
-                syn_of_rwtab=n;
-                break;
-            }
-    }
-    //*****************3 整数 4小数********************************//
-    else if((ch>='0'&&ch<='9'))
-    {
-
-        bool flag = false; //是否是小数
-        sum=0;
-
-        while((ch>='0'&&ch<='9'))
-        {
-            sum=sum*10+ch-'0';
-            ch=prog[p++];
-        }
-        if(ch=='.'){
-            flag = true;
-            ch=prog[p++];
-            double tag = 0.1; //记录小数的位数
-            while((ch>='0' && ch<='9')){
-                sum+=(ch-'0')*tag;
-                tag=tag*0.1;
-                ch=prog[p++];
-            }
-        }//if
-        p--;
-        if(flag) syn = 4;
-        else syn = 3;
-        if(sum>32767)
-            syn=-1;
-    }
-    //********************5 判断是不是字符串****************************//
-    else if(ch=='\"'){
-        syn = 5;
-        m=0;
-        token[m++] = ch;
-        while((ch=prog[p++])!='\"')
-            token[m++] = ch;
-        token[m] = ch;
-        // p--;
-    }
-
-    //*******************7 运算符*******************//
-    else switch(ch)
-    {
-        case'<':
-            m=0;
-            token[m++]=ch;
-            ch=prog[p++];
-            if(ch=='>')
-            {
-                syn=7;
-                token[m++]=ch;
-            }
-            else if(ch=='=')
-            {
-                syn=7;
-                token[m++]=ch;
-            }
-            else
-            {
-                syn=7;
-                p--;
-            }
-            break;
-        case'>':
-            m=0;
-            token[m++]=ch;
-            ch=prog[p++];
-            if(ch=='=')
-            {
-                syn=7;
-                token[m++]=ch;
-            }
-            else
-            {
-                syn=7;
-                p--;
-            }
-            break;
-        case':':
-            m=0;token[m++]=ch;
-            ch=prog[p++];
-            if(ch=='=')
-            {
-                syn=7;
-                token[m++]=ch;
-            }
-            else
-            {
-                syn=7;
-                p--;
-            }
-            break;
-        case'*':syn=7;token[0]=ch;break;
-        case'/':syn=7;token[0]=ch;break;
-        case'+':syn=7;token[0]=ch;break;
-        case'-':syn=7;token[0]=ch;break;
-        case'=':syn=7;token[0]=ch;break;
-        case'#':syn=0;token[0]=ch;break;
-        case'\n':syn=-2;locate_line=0;break;
-        default: syn=-1;break;
-    }
+int main(){
+    return 0;
 }
 
-
-int main(int argc, const char * argv[]) {
-    p=0;
-    row=1;
-    cout<<"Please input string:"<<endl;
-    do
-    {
+bool read_file(){
+    char ch;
+    int p=0;
+    do{
         cin.get(ch);
-        prog[p++]=ch;
-    }
-    while(ch!='#');
-    int temp = 0; //不区分大小写，全部转换成小写。
-    while(prog[temp]!='#'){
-        if(prog[temp]<='Z' && prog[temp]>='A')
+        prog[p++] = ch;
+    }while (ch!='#') ;
+
+    //程序中不区分大小写，所有字符一律变为小写处理
+    int temp = 0;
+    while (prog[temp]!='#') {
+        if(prog[temp]<='Z' && prog[temp] >= 'A')
             prog[temp]+='a'-'A';
         temp++;
     }
-    p=0;
-    do
-    {
-        getToken();
-        locate_line++;
-        switch(syn)
-        {
-            case 1: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<rwtab[syn_of_rwtab]<<")"<<endl;break;
-            case 2: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<token<<")"<<endl; break;
-            case 5: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<token<<")"<<endl; break;
-            case 6: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<token[0]<<")"<<endl; break;
-            case 3: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<sum<<")"<<endl; break;
-            case 4: cout<<row<<" "<<locate_line<<" "<<"("<<syn<<","<<sum<<")"<<endl; break;
-            case -1: cout<<"Error in row "<<row<<"!"<<endl; break;
-            case -2: row=row++;break;
-        }
-    }
-    while (syn!=0);
+    return true;
+}
+
+int get_token(char *token){
+    int type=0,n=0;
+    for(n=0;n<WORD_LENGTH;n++) token[n]=NULL;
+
+
+    return type;
 }
